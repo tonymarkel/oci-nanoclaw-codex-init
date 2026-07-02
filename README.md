@@ -7,7 +7,8 @@ Nanoclaw is a small agent that runs in it's own sandbox. In it's current form it
 curl -sSL https://github.com/tonymarkel/oci-nanoclaw-codex-init/nanoclaw-init.sh | bash
 ```
 
-Note: this script performs a `dnf update` and reboots the machine
+> [!NOTE]
+> This script performs a `dnf update -y` and reboots the machine
 
 ## After Installation - Next Login
 1. Codex Setup - Choose Device Pairing
