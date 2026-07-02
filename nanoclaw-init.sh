@@ -282,12 +282,11 @@ if [ ! -f "$FLAG_FILE" ]; then
     cd nanoclaw-v2
     codex
     touch "$FLAG_FILE"
-    cd nanoclaw-v2
     ./nanoclaw.sh
 else
     cd nanoclaw-v2
 fi
 EOF
 chmod +x ~/first_login.sh
-echo "~/first_login.sh" >> ~/.bash_profile
+echo ". ~/first_login.sh" >> ~/.bash_profile
 sudo reboot
