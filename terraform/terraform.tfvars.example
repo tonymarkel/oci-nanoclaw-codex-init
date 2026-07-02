@@ -1,0 +1,8 @@
+# Copy to terraform.tfvars and fill in your tenancy OCID
+# (the `tenancy=` line in ~/.oci/config).
+tenancy_ocid = "ocid1.tenancy.oc1..aaaa..."
+
+# Everything else has sensible defaults — override here if needed.
+# config_file_profile = "DEFAULT"
+# instance_count      = 5
+# instance_shape      = "VM.Standard.A2.Flex"

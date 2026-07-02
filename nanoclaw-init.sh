@@ -45,7 +45,7 @@ npm install -g @openai/codex
 # ===========================================================================
 if [ ! -x /usr/local/bin/docker-compose ]; then
   sudo curl -fSL \
-    https://github.com/docker/compose/releases/latest/download/docker-compose-linux-x86_64 \
+    "https://github.com/docker/compose/releases/latest/download/docker-compose-linux-$(uname -m)" \
     -o /usr/local/bin/docker-compose
   sudo chmod +x /usr/local/bin/docker-compose
 fi
@@ -270,7 +270,7 @@ fi
 # ===========================================================================
 # Set interactive steps to run on first login after reboot
 # ===========================================================================
-cat <<'EOF' > ~/first_login.sh
+cat <<'EOF' > /home/opc/first_login.sh
 #!/bin/bash
 
 # Path to the tracking flag
@@ -287,6 +287,6 @@ else
     cd nanoclaw-v2
 fi
 EOF
-chmod +x ~/first_login.sh
-echo ". ~/first_login.sh" >> ~/.bash_profile
+chmod +x /home/opc/first_login.sh
+echo ". /home/opc/first_login.sh" >> /home/opc/.bash_profile
 sudo reboot

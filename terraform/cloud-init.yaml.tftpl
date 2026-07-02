@@ -1,0 +1,17 @@
+#cloud-config
+# nanoclaw-init.sh is written for an unprivileged user with sudo ($HOME,
+# ~/.bashrc, systemctl --user), but cloud-init runs as root. So: stage the
+# script, enable lingering so opc's systemd user manager (and podman.socket)
+# can run without a login session, wait for the user bus, then run the
+# script as opc. The script reboots the instance when it finishes.
+write_files:
+  - path: /opt/nanoclaw-init.sh
+    permissions: "0755"
+    owner: root:root
+    encoding: b64
+    content: ${base64encode(init_script)}
+
+runcmd:
+  - loginctl enable-linger opc
+  - 'for i in $(seq 1 30); do [ -S "/run/user/$(id -u opc)/bus" ] && break; sleep 1; done'
+  - 'su - opc -c "XDG_RUNTIME_DIR=/run/user/$(id -u opc) DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$(id -u opc)/bus bash /opt/nanoclaw-init.sh" >> /var/log/nanoclaw-init.log 2>&1'
